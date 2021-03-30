@@ -16,9 +16,10 @@ checkBox.addEventListener('click', function (event) {
         return;
     }
 
-    request('api/signin', {
-        "login": form.login.value,
-        "password": form.password.value
-    }, () => window.location.href = '/account/signin')
-
+    request('api/signIn.php', {
+        "login": loginControl.value,
+        "passwd": passControl.value
+    }, () => {
+        location.reload();
+    });
 }, false);

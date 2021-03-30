@@ -44,7 +44,7 @@ checkBox.addEventListener('click', function (event) {
         "email": emailControl.value,
         "passwd": passControl.value
     }, () => {
-        console.log("R");
-    })
+        location.reload();
+    });
 
 }, false);

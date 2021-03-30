@@ -1,38 +1,35 @@
 <?php
 
-/*
- * MODEL
- */
-
 include_once __DIR__ . "/Mysql.php";
+include_once __DIR__ . "/../exceptions/AccessForbidden.php";
 
-class signUp extends Mysql
+class signIn extends Mysql
 {
     private $sql;
 
     /**
-     * signUp constructor.
+     * signIn constructor.
      * @param User $user
      */
     public function __construct(User $user)
     {
         try {
             $this->sql = parent::__construct();
-            if ($this->checkUserExist($user) == 1) {
-                throw new RuntimeException("Пользователь уже зарегистрирован!");
+            if ($this->checkLoginAndPasswd($user->getLogin(), $user->getPasswd()) == 0) {
+                throw new AccessForbidden();
             } else {
-                $user->setId($this->regUser($user));
-                $user->setToken($this->regToken($user->getId()));
-                setcookie("token", $user->getToken(), time() + 3600, "/");
+                $userId = $this->getUserId($user->getLogin(), $user->getPasswd());
+                $token = $this->regToken($userId);
+                setcookie("token", $token, time() + 3600, "/");
             }
         } catch (RuntimeException $exception) {
-            throw new RuntimeException($exception->getMessage());
+            throw new RuntimeException(json_encode(['error' => $exception->getMessage()]));
         }
     }
 
     function generateRandomString($length = 32): string
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=|/';
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-+=|';
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -56,34 +53,26 @@ class signUp extends Mysql
         }
     }
 
-    function regUser(User $user): int
+    private function checkLoginAndPasswd($login, $passwd)
     {
         try {
-            $fio = $user->getFio();
-            $login = $user->getLogin();
-            $email = $user->getEmail();
-            $passwd = $user->getPasswd();
-
-            $stmt = $this->prepare("insert into users (fio,login, email ,passwd ) value (?,?,?,?)");
-            $stmt->bind_param("ssss", $fio, $login, $email, $passwd);
+            $stmt = $this->prepare("select count(id) from users where login = ? and passwd = ?");
+            $stmt->bind_param("ss", $login, $passwd);
             $stmt->execute();
             if ($stmt->errno != 0) throw new RuntimeException($stmt->error, $stmt->errno);
-            $result = $stmt->insert_id;
+            $result = $stmt->get_result()->fetch_array(MYSQLI_NUM)[0];
             $stmt->close();
             return $result;
         } catch (RuntimeException $exception) {
             throw new RuntimeException($exception->getMessage());
         }
-
     }
 
-    function checkUserExist(User $user)
+    private function getUserId($login, $passwd): int
     {
         try {
-            $login = $user->getLogin();
-
-            $stmt = $this->prepare("select count(id) from users where login = ?");
-            $stmt->bind_param("s", $login);
+            $stmt = $this->prepare("select id from users where login = ? and passwd = ?");
+            $stmt->bind_param("ss", $login, $passwd);
             $stmt->execute();
             if ($stmt->errno != 0) throw new RuntimeException($stmt->error, $stmt->errno);
             $result = $stmt->get_result()->fetch_array(MYSQLI_NUM)[0];
