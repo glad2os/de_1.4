@@ -16,5 +16,9 @@ checkBox.addEventListener('click', function (event) {
         return;
     }
 
-    console.log("done!");
+    request('api/signin', {
+        "login": form.login.value,
+        "password": form.password.value
+    }, () => window.location.href = '/account/signin')
+
 }, false);

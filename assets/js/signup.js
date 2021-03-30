@@ -37,5 +37,14 @@ checkBox.addEventListener('click', function (event) {
         event.preventDefault();
         return;
     }
-    console.log("done!");
+
+    request('api/signUp.php', {
+        "fio": fioControl.value,
+        "login": loginControl.value,
+        "email": emailControl.value,
+        "passwd": passControl.value
+    }, () => {
+        console.log("R");
+    })
+
 }, false);
