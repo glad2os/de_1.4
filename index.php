@@ -16,9 +16,11 @@ try {
     } elseif ($routes[1] == 'signin') {
         print file_get_contents(__DIR__ . "/templates/signin.html");
     } else {
-        if (array_key_exists($routes[1], $staticPagesCfg))
-            print file_get_contents(__DIR__ . "/templates/" . $staticPagesCfg[$routes[1]]);
-        else throw new NotFoundEx();
+        if (array_key_exists($routes[1], $staticPagesCfg)) {
+            @include(__DIR__ . "/controllers/" . $staticPagesCfg[$routes[1]] . ".php");
+            print @file_get_contents(__DIR__ . "/templates/" . $staticPagesCfg[$routes[1]]);
+        } else
+            throw new NotFoundEx();
     }
 } catch (RuntimeException $exception) {
     include_once __DIR__ . "/templates/exception.html";

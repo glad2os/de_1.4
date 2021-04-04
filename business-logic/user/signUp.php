@@ -4,7 +4,7 @@
  * MODEL
  */
 
-include_once __DIR__ . "/Mysql.php";
+include_once __DIR__ . "/../Mysql.php";
 
 class signUp extends Mysql
 {

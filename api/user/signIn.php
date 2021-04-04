@@ -2,8 +2,8 @@
 /*
  * API
  */
-include_once __DIR__ . "/../utils/User.php";
-include_once __DIR__ . "/../business-logic/signIn.php";
+include_once __DIR__ . "/../../utils/User.php";
+include_once __DIR__ . "/../../business-logic/signIn.php";
 
 header('Content-Type: application/json');
 $request = json_decode(file_get_contents("php://input"), true);

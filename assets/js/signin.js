@@ -16,7 +16,7 @@ checkBox.addEventListener('click', function (event) {
         return;
     }
 
-    request('api/signIn.php', {
+    request('api/user/signIn.php', {
         "login": loginControl.value,
         "passwd": passControl.value
     }, () => {
