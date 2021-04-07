@@ -18,7 +18,7 @@ try {
     } else {
         if (array_key_exists($routes[1], $staticPagesCfg)) {
             @include(__DIR__ . "/controllers/" . $staticPagesCfg[$routes[1]] . ".php");
-            print @file_get_contents(__DIR__ . "/templates/" . $staticPagesCfg[$routes[1]]);
+            print file_get_contents(__DIR__ . "/templates/" . $staticPagesCfg[$routes[1]]);
         } else
             throw new NotFoundEx();
     }
