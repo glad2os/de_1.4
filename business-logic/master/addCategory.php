@@ -28,7 +28,6 @@ class addCategory extends Mysql
         }
     }
 
-
     public function removeCategory(string $category): int
     {
         try {

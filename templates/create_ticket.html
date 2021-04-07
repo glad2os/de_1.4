@@ -7,41 +7,42 @@
     <link rel="shortcut icon" href="/assets/img/ogo_ok.png" type="image/x-icon">
 </head>
 <body>
-    <div class="container" style="margin-top: 15px">
-        <hr>
-        <p class="fs-4">Создание заявки</p>
-        <div class="mb-3">
-            <label for="building_address" class="form-label">Адрес помещения</label>
-            <textarea class="form-control" id="building_address" rows="2"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Описание</label>
-            <textarea class="form-control" id="description" rows="2"></textarea>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Категория</label>
-            <select class="form-select" id='category' aria-label="Default select example"></select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Цена</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text">₽</span>
-                <input onkeyup="this.value=this.value.replace(/[^\d]/,'')" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-text">.00</span>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="formFile" class="form-label">Default file input example</label>
-            <input class="form-control" type="file" id="formFile">
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                Согласие на обработку персональных данных - должно быть отмечено.
-            </label>
-        </div>
-        <script src="assets/js/create_ticker.js"></script>
-        <script src="assets/js/getCategory.js"></script>
+<div class="container" style="margin-top: 15px">
+    <hr>
+    <p class="fs-4">Создание заявки</p>
+    <div class="mb-3">
+        <label for="building_address" class="form-label">Адрес помещения</label>
+        <textarea class="form-control" id="building_address" rows="2"></textarea>
     </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Описание</label>
+        <textarea class="form-control" id="description" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Категория</label>
+        <select class="form-select" id='category' aria-label="Default select example"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Цена</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text">₽</span>
+            <input id='max_price' onkeyup="this.value=this.value.replace(/[^\d]/,'')" type="number" class="form-control"
+                   aria-label="Amount (to the nearest dollar)">
+            <span class="input-group-text">.00</span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Согласие на обработку персональных данных - должно быть отмечено.
+        </label>
+    </div>
+    <script src="assets/js/create_ticker.js"></script>
+    <script src="assets/js/getCategory.js"></script>
+</div>
 </body>
 </html>

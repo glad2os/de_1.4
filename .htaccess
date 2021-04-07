@@ -5,3 +5,4 @@ RewriteRule . index.php [L]
 RewriteRule ^assets(/.*|)$ - [L] # don't take any action
 RewriteRule ^api(/.*|)$ - [L] # don't take any action
 RewriteRule ^master(/.*|)$ - [L] # don't take any action
+RewriteRule ^uploads(/.*|)$ - [L] # don't take any action
