@@ -1,5 +1,5 @@
 {
-  "signup": "signup",
+  "signup": "signup.html",
   "signout": "signout",
   "create_ticket": "create_ticket.html"
 }

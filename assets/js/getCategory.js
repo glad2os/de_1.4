@@ -1,4 +1,3 @@
-
 const category = document.getElementById('category');
 
 const xhr = new XMLHttpRequest();
