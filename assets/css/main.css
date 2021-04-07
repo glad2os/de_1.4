@@ -1,0 +1,34 @@
+.container {
+    margin-top: 15px;
+}
+
+.item {
+    border: #0b5ed7 solid 1px;
+    width: 400px;
+    margin-right: 15px;
+}
+
+.tickets {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item > img {
+    width: 400px;
+    height: 400px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+.item > .time {
+    color: #bebbbb;
+}
+
+.item div {
+    margin-left: 5px;
+}
+
+.item button {
+    margin: 8px 5px;
+}

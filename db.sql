@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 07 2021 г., 22:30
+-- Время создания: Апр 08 2021 г., 00:31
 -- Версия сервера: 10.4.18-MariaDB
 -- Версия PHP: 8.0.3
 
@@ -53,9 +53,16 @@ CREATE TABLE `tickets` (
   `category_id` int(11) NOT NULL,
   `max_price` int(11) NOT NULL,
   `img_path` text COLLATE utf8_bin NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` text COLLATE utf8_bin NOT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `tickets`
+--
+
+INSERT INTO `tickets` (`ticket_id`, `user_id`, `building_address`, `description`, `category_id`, `max_price`, `img_path`, `status`, `time`) VALUES
+(4, 1, '123', '123', 12, 1234, '/uploads/bg.jpg', 'Новая', '2021-04-07 21:19:34');
 
 -- --------------------------------------------------------
 
@@ -79,7 +86,9 @@ INSERT INTO `token` (`user_id`, `token`) VALUES
 (1, 'w7gmZS68qqxkxrbsxBcE@u0osdA-Ye4n'),
 (1, 'myLaSTv9rR)uLTxGmD4(wp%L^VNa9j@R'),
 (1, '9%2_3aJ*V+l8V@0Vh1@=7@EA@WghIh(S'),
-(1, '=r7dKO^xt)DuaE3Y)8$csExG9)fK4!qd');
+(1, '=r7dKO^xt)DuaE3Y)8$csExG9)fK4!qd'),
+(1, 'LBGP=+IrC0Sol!8&X7nO$ia+mYK4$fgi'),
+(1, '6EYhj9lmS4P2lErrHwIs&XC1m@k|0r9O');
 
 -- --------------------------------------------------------
 
@@ -120,7 +129,8 @@ ALTER TABLE `category`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`ticket_id`),
-  ADD KEY `category_id` (`category_id`) USING BTREE;
+  ADD KEY `category_id` (`category_id`) USING BTREE,
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `token`
@@ -148,7 +158,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -159,6 +169,13 @@ ALTER TABLE `users`
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `tickets`
+--
+ALTER TABLE `tickets`
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `token`

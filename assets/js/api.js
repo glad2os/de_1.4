@@ -2,7 +2,9 @@ function nop() {
 }
 
 function request(target, body, callback = nop, fallbackCallback = function (resp) {
-    alert(resp['error']);
+    if (!(resp['error'] === null || resp['error'] === undefined)) {
+        alert(resp['error']);
+    }
 }) {
     const request = new XMLHttpRequest();
     request.open("POST", `/${target}`, true);
@@ -10,7 +12,6 @@ function request(target, body, callback = nop, fallbackCallback = function (resp
     request.responseType = "json";
     request.onreadystatechange = () => {
         if (request.readyState === XMLHttpRequest.DONE) {
-            console.log(request.status);
             if (request.status === 200) callback(request.response);
             if (request.status === 204) callback(request.response);
             else fallbackCallback(request.response);

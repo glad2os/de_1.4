@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <title>МастерОК</title>
     <link rel="stylesheet" href="/assets/bootstrap-5.0.0-beta2-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="shortcut icon" href="/assets/img/ogo_ok.png" type="image/x-icon">
+
 </head>
 <body>
-<a href="/create_ticket">Создать заявку</a>
-<div class="tickets">
-    <h1>Активные заявки</h1>
+<div class="container">
 
+
+    <a href="/signout">Выход</a>
+
+    <a href="/create_ticket">Создать заявку</a>
+
+
+    <h2>Активные заявки</h2>
+    <div class="tickets"></div>
 </div>
-<a href="/signout">Выход</a>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/getAllTickets.js"></script>
 </body>
 </html>
