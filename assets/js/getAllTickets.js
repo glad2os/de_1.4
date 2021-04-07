@@ -35,6 +35,16 @@ request('api/ticket/get_all_tickets.php', {}, (item) => {
             button.type = "button";
             button.innerText = "Удалить";
 
+            button.addEventListener('click', () => {
+                request('api/ticket/remove_ticket.php', {
+                    "id": value['ticket_id']
+                }, () => {
+                    location.reload();
+                }, () => {
+
+                });
+            });
+
             itemdiv.appendChild(ticket_id);
             itemdiv.appendChild(building_address);
             itemdiv.appendChild(description);
